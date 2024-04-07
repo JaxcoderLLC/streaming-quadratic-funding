@@ -102,13 +102,16 @@ export default function StreamingQuadraticFunding() {
         <Col xs={transactionPanelState.show ? "9" : 0} className="px-4">
           <Stack direction="vertical" className="justify-content-stretch pt-2">
             <p className="d-flex fs-3 text-aqua mb-0">
-              Streaming Quadratic Funding
+              Private Matching QF
             </p>
+            {/* <p className="text-white fs-4 mb-1">
+              Josh Leavitt for Nevada
+            </p> */}
             <p className="text-white fs-4 mb-1">
-              A quadratic funding round every second
+              A private quadratic funding experiment
             </p>
             <p className="text-info fs-5 mb-0">
-              Beta Run - February 15 - April 15, 2024
+              Beta Run - TBA
             </p>
           </Stack>
           <Visualization
