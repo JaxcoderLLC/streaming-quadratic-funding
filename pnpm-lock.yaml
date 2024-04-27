@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@allo-team/allo-v2-sdk':
-    specifier: ^1.0.58
-    version: 1.0.58(@typechain/ethers-v6@0.5.1)(ethers@5.7.2)(typechain@8.3.2)(typescript@5.0.4)
+    specifier: ^1.0.67
+    version: 1.0.67(@typechain/ethers-v6@0.5.1)(ethers@5.7.2)(typechain@8.3.2)(typescript@5.0.4)
   '@apollo/client':
     specifier: ^3.8.9
     version: 3.8.9(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
@@ -18,8 +18,8 @@ dependencies:
     specifier: ^0.6.12
     version: 0.6.12(@openzeppelin/test-helpers@0.5.16)(ethers@5.7.2)(graphql@16.8.1)(typescript@5.0.4)
   '@transak/transak-sdk':
-    specifier: ^2.1.3
-    version: 2.1.3
+    specifier: ^3.1.1
+    version: 3.1.1
   '@wagmi/core':
     specifier: ^1.4.7
     version: 1.4.7(@types/react@18.2.15)(react@18.2.0)(typescript@5.0.4)(viem@1.20.2)
@@ -115,8 +115,8 @@ packages:
     resolution: {integrity: sha512-nA9XHtlAkYfJxY7bce8DcN7eKxWWCWkU+1GR9d+U6MbNpfwQp8TI7vqOsBsMcHoT4mBu2kypKoSKnghEzOOq5Q==}
     dev: false
 
-  /@allo-team/allo-v2-sdk@1.0.58(@typechain/ethers-v6@0.5.1)(ethers@5.7.2)(typechain@8.3.2)(typescript@5.0.4):
-    resolution: {integrity: sha512-6yf0mwTLP7LG0mFQc3V+2YtJflH6K+9k22xOG9oW7+22rP0YrEEfqRLFVGTilBRyCa2Yn3WTy6BZzWSDqVzJxg==}
+  /@allo-team/allo-v2-sdk@1.0.67(@typechain/ethers-v6@0.5.1)(ethers@5.7.2)(typechain@8.3.2)(typescript@5.0.4):
+    resolution: {integrity: sha512-q1+1AfkGFRkmYrP7lK/c0ggiVb2eOzfv05nFpJiReTgRL9aL2ubSmnLF492jSphvPcAe5nj9nNZ1peKzO3qLlA==}
     engines: {node: '>=16.15.0', npm: '>=8.5.5'}
     dependencies:
       '@typechain/hardhat': 9.1.0(@typechain/ethers-v6@0.5.1)(ethers@5.7.2)(hardhat@2.22.2)(typechain@8.3.2)
@@ -3532,14 +3532,13 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  /@transak/transak-sdk@2.1.3:
-    resolution: {integrity: sha512-F4tyCL3vCcIFrRT8h/+NsAozRaJ6EM1bny2UZk7Dp7qLMdGjpviD4LfdqEoWW4Gu25Qn6PVu2Q5DuSNTjvEn4Q==}
-    engines: {node: '>=16.0.0'}
+  /@transak/transak-sdk@3.1.1:
+    resolution: {integrity: sha512-zqUAEIQYq6mekhid/WhIHlLVWzD8tsuoEjsLdb9uubHFl+Ba8QGdZSVzxjhuTnHR3hVK5YdVHbil90CN43wTLA==}
+    engines: {node: '>=18.0.0'}
     dependencies:
-      '@types/events': 3.0.3
       events: 3.3.0
       pako: 2.1.0
-      query-string: 8.1.0
+      query-string: 8.2.0
     dev: false
 
   /@truffle/abi-utils@1.0.3:
@@ -3939,10 +3938,6 @@ packages:
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
     dev: true
-
-  /@types/events@3.0.3:
-    resolution: {integrity: sha512-trOc4AAUThEz9hapPtSd7wf5tiQKvTtu5b371UxXdTuqzIh0ArcRspRP0i0Viu+LXstIQ1z96t1nsPxT9ol01g==}
-    dev: false
 
   /@types/geojson@7946.0.13:
     resolution: {integrity: sha512-bmrNrgKMOhM3WsafmbGmC+6dsF2Z308vLFsQ3a/bT8X8Sv5clVYpPars/UPq+sAaJP+5OoLAYgwbkS5QEJdLUQ==}
@@ -10612,8 +10607,8 @@ packages:
       strict-uri-encode: 2.0.0
     dev: false
 
-  /query-string@8.1.0:
-    resolution: {integrity: sha512-BFQeWxJOZxZGix7y+SByG3F36dA0AbTy9o6pSmKFcFz7DAj0re9Frkty3saBn3nHo3D0oZJ/+rx3r8H8r8Jbpw==}
+  /query-string@8.2.0:
+    resolution: {integrity: sha512-tUZIw8J0CawM5wyGBiDOAp7ObdRQh4uBor/fUR9ZjmbZVvw95OD9If4w3MQxr99rg0DJZ/9CIORcpEqU5hQG7g==}
     engines: {node: '>=14.16'}
     dependencies:
       decode-uri-component: 0.4.1

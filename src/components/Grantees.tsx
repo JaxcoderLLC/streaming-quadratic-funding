@@ -60,7 +60,7 @@ export default function Grantees(props: GranteesProps) {
           }}
           key={i}
         >
-          <Button
+          {/* <Button
             variant="success"
             className="d-flex flex-column justify-content-center align-items-center h-100 p-0 fs-3 text-white fw-bold"
             onClick={() =>
@@ -72,7 +72,7 @@ export default function Grantees(props: GranteesProps) {
             }
           >
             <Image src={HandIcon} alt="donate" width={26} />
-          </Button>
+          </Button> */}
           <Card className="h-100 px-1 bg-transparent text-white border-0">
             <Card.Title className="m-0 mb-1 p-0 fs-4">{grantee}</Card.Title>
             <Stack
@@ -124,7 +124,7 @@ export default function Grantees(props: GranteesProps) {
                     )
                   : 0}{" "}
               </Badge>
-              <Badge className="bg-slate w-25 rounded-1 px-1 fs-6 text-start fw-normal">
+              <Badge className="bg-slate w-40 rounded-1 px-1 fs-6 text-start fw-normal">
                 {BigInt(matchingData.members[i].flowRate) > 0
                   ? parseFloat(
                       perSecondToPerMonth(

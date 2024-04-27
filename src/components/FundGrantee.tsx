@@ -94,7 +94,7 @@ export default function FundGrantee(props: FundGranteeProps) {
         direction="horizontal"
         className="justify-content-between align-items-center py-2 text-white"
       >
-        <Card.Text className="fs-3 pe-0 m-0">Fund Grantee</Card.Text>
+        <Card.Text className="fs-3 pe-0 m-0">Fund Candidate</Card.Text>
         <Button
           variant="transparent"
           className="position-absolute end-0 px-2 me-1 py-0"
