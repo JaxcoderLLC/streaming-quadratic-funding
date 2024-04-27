@@ -44,7 +44,11 @@ export default function Grantees(props: GranteesProps) {
     <Stack
       direction="vertical"
       className="text-white position-relative"
-      style={{ width: VIZ_CARD_WIDTH_GRANTEE, height: dimensions.height }}
+      style={{
+        width: VIZ_CARD_WIDTH_GRANTEE,
+        height: dimensions.height,
+        marginRight: 100,
+      }}
     >
       {grantees.map((grantee, i) => (
         <Stack
@@ -60,7 +64,7 @@ export default function Grantees(props: GranteesProps) {
           }}
           key={i}
         >
-          {/* <Button
+          <Button
             variant="success"
             className="d-flex flex-column justify-content-center align-items-center h-100 p-0 fs-3 text-white fw-bold"
             onClick={() =>
@@ -72,9 +76,11 @@ export default function Grantees(props: GranteesProps) {
             }
           >
             <Image src={HandIcon} alt="donate" width={26} />
-          </Button> */}
+          </Button>
           <Card className="h-100 px-1 bg-transparent text-white border-0">
-            <Card.Title className="m-0 mb-1 p-0 fs-4">{grantee}</Card.Title>
+            <Card.Title className="m-0 mb-1 p-0 fs-4">
+              {grantee ?? "No Name"}
+            </Card.Title>
             <Stack
               direction="horizontal"
               gap={2}
@@ -85,7 +91,12 @@ export default function Grantees(props: GranteesProps) {
                 className="align-items-center fs-6 opacity-50 text-white"
               >
                 {directAllocationData[i].activeIncomingStreamCount}
-                <Image src={ContributionsIcon} alt="contributions" width={16} />
+                <Image
+                  src={ContributionsIcon}
+                  alt="contributions"
+                  width={16}
+                  className=""
+                />
               </Stack>
               <Card.Subtitle
                 as="p"
@@ -104,9 +115,9 @@ export default function Grantees(props: GranteesProps) {
                   ? parseFloat(
                       perSecondToPerMonth(
                         Number(
-                          formatEther(BigInt(userAllocationData[i].flowRate))
-                        )
-                      ).toFixed(6)
+                          formatEther(BigInt(userAllocationData[i].flowRate)),
+                        ),
+                      ).toFixed(6),
                     )
                   : 0}{" "}
               </Badge>
@@ -117,10 +128,10 @@ export default function Grantees(props: GranteesProps) {
                         Number(
                           formatEther(
                             BigInt(directAllocationData[i].flowRate) -
-                              BigInt(userAllocationData[i].flowRate)
-                          )
-                        )
-                      ).toFixed(6)
+                              BigInt(userAllocationData[i].flowRate),
+                          ),
+                        ),
+                      ).toFixed(6),
                     )
                   : 0}{" "}
               </Badge>
@@ -129,9 +140,9 @@ export default function Grantees(props: GranteesProps) {
                   ? parseFloat(
                       perSecondToPerMonth(
                         Number(
-                          formatEther(BigInt(matchingData.members[i].flowRate))
-                        )
-                      ).toFixed(6)
+                          formatEther(BigInt(matchingData.members[i].flowRate)),
+                        ),
+                      ).toFixed(6),
                     )
                   : 0}{" "}
               </Badge>

@@ -106,7 +106,7 @@ export default function FundingSources(props: FundingSourcesProps) {
           height: dimensions.pathHeight,
         }}
       >
-        <Card.Header className="p-0 border-0 fs-4">You</Card.Header>
+        <Card.Header className="p-0 border-0 fs-4">User</Card.Header>
         <Card.Body className="d-flex flex-column justify-content-center gap-1 p-0 pb-1 fs-6">
           <Stack direction="horizontal" gap={1} className="align-items-center">
             <Image src={DAIWhite} alt="dai" width={14} />
@@ -139,7 +139,7 @@ export default function FundingSources(props: FundingSourcesProps) {
         </Card.Body>
       </Card>
       <Card
-        className="position-absolute w-100 bg-secondary border-0 rounded-end-0 px-2 py-1 text-white"
+        className="position-absolute w-180 bg-secondary border-0 rounded-end-0 px-2 py-1 text-white"
         style={{
           top: startYScale(1) - 105,
           width: VIZ_CARD_WIDTH_SOURCE,
@@ -193,7 +193,7 @@ export default function FundingSources(props: FundingSourcesProps) {
         </Card.Body>
       </Card>
       <Card
-        className="position-absolute w-100 bg-slate border-0 rounded-end-0 p-0 pe-1 text-white"
+        className="position-absolute w-180 bg-slate border-0 rounded-end-0 p-0 pe-1 text-white"
         style={{
           top: startYScale(2) - 105,
           width: VIZ_CARD_WIDTH_SOURCE,

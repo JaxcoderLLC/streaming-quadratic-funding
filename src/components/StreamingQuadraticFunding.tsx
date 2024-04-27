@@ -123,7 +123,7 @@ export default function StreamingQuadraticFunding() {
             matchingData={matchingData}
           />
         </Col>
-        {/* {transactionPanelState.show &&
+        {transactionPanelState.show &&
           transactionPanelState.granteeIndex !== null && (
             <Col xs="3" className="p-0">
               <FundGrantee
@@ -155,7 +155,7 @@ export default function StreamingQuadraticFunding() {
                 }
               />
             </Col>
-          )} */}
+          )}
       </Row>
     </Container>
   );

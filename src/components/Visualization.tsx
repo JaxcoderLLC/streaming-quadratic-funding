@@ -143,7 +143,7 @@ export default function Visualization(props: VisualizationProps) {
     useMemo(() => {
       const xScale = scaleLinear()
         .domain([0, 1])
-        .range([0, dimensions.width])
+        .range([0, dimensions.width / 2])
         .clamp(true);
       const startYScale = scaleLinear()
         .domain([-1, sourceIndexes.length])
@@ -170,13 +170,13 @@ export default function Visualization(props: VisualizationProps) {
       .append("g")
       .style("transform", `translateY(-60px)`);
     const linkLineGenerator = line()
-      .x((_d, i) => i * (dimensions.width / 5))
+      .x((_d, i) => i * (dimensions.width / 10))
       .y((d, i) => (i <= 2 ? startYScale(d[0]) : endYScale(d[1])))
       .curve(curveMonotoneX);
     const linkOptions = merge(
       sourceIndexes.map((startId) =>
-        granteeIndexes.map((endId) => new Array(6).fill([startId, endId]))
-      )
+        granteeIndexes.map((endId) => new Array(6).fill([startId, endId])),
+      ),
     );
     const linksGroup = bounds.append("g");
 
@@ -206,23 +206,23 @@ export default function Visualization(props: VisualizationProps) {
       formatEther(
         calcTotalFlowRate(
           userAllocationData.map((elem: AllocationData) =>
-            BigInt(elem.flowRate)
-          )
-        )
-      )
+            BigInt(elem.flowRate),
+          ),
+        ),
+      ),
     );
     const flowRateDirectAllocation =
       Number(
         formatEther(
           calcTotalFlowRate(
             directAllocationData.map((elem: AllocationData) =>
-              BigInt(elem.flowRate)
-            )
-          )
-        )
+              BigInt(elem.flowRate),
+            ),
+          ),
+        ),
       ) - flowRateUserAllocation;
     const flowRateMatching = Number(
-      formatEther(calcTotalFlowRate([BigInt(matchingData.flowRate)]))
+      formatEther(calcTotalFlowRate([BigInt(matchingData.flowRate)])),
     );
 
     const totalDai = flowRateUserAllocation + flowRateDirectAllocation;
@@ -264,8 +264,8 @@ export default function Visualization(props: VisualizationProps) {
         Number(
           formatEther(
             BigInt(directAllocationData[i].flowRate) -
-              BigInt(userAllocationData[i].flowRate)
-          )
+              BigInt(userAllocationData[i].flowRate),
+          ),
         ) / flowRateDirectAllocation;
 
       datasetDai[1][i] = weight;
@@ -280,9 +280,9 @@ export default function Visualization(props: VisualizationProps) {
             BigInt(userAllocationData[i].flowRate),
             BigInt(matchingData.flowRate),
             BigInt(matchingData.members[i].units),
-            BigInt(matchingData.totalUnits)
-          )
-        )
+            BigInt(matchingData.totalUnits),
+          ),
+        ),
       );
 
       const userWeight = userImpact / flowRateMatching;
@@ -307,20 +307,20 @@ export default function Visualization(props: VisualizationProps) {
       timerSymbolsDai.restart(
         (elapsed) => enterSymbol(elapsed, datasetDai, Token.DAI),
         MS_PER_SECOND / symbolsPerSecondDai,
-        timerStarted.dai
+        timerStarted.dai,
       );
       timerUpdateSymbolsDai.restart(
         (elapsed) => updateSymbols(elapsed, Token.DAI),
         0,
-        timerStarted.dai
+        timerStarted.dai,
       );
     } else if (symbolsPerSecondDai > 0) {
       _timerSymbolsDai = interval(
         (elapsed) => enterSymbol(elapsed, datasetDai, Token.DAI),
-        MS_PER_SECOND / symbolsPerSecondDai
+        MS_PER_SECOND / symbolsPerSecondDai,
       );
       _timerUpdateSymbolsDai = timer((elapsed) =>
-        updateSymbols(elapsed, Token.DAI)
+        updateSymbols(elapsed, Token.DAI),
       );
 
       setTimerUpdateSymbolsDai(_timerUpdateSymbolsDai);
@@ -334,20 +334,20 @@ export default function Visualization(props: VisualizationProps) {
       timerSymbolsEth.restart(
         (elapsed) => enterSymbol(elapsed, datasetEth, Token.ETH),
         MS_PER_SECOND / symbolsPerSecondEth,
-        timerStarted.eth
+        timerStarted.eth,
       );
       timerUpdateSymbolsEth.restart(
         (elapsed) => updateSymbols(elapsed, Token.ETH),
         0,
-        timerStarted.eth
+        timerStarted.eth,
       );
     } else if (symbolsPerSecondEth > 0) {
       _timerSymbolsEth = interval(
         (elapsed) => enterSymbol(elapsed, datasetEth, Token.ETH),
-        MS_PER_SECOND / symbolsPerSecondEth
+        MS_PER_SECOND / symbolsPerSecondEth,
       );
       _timerUpdateSymbolsEth = timer((elapsed) =>
-        updateSymbols(elapsed, Token.ETH)
+        updateSymbols(elapsed, Token.ETH),
       );
 
       setTimerUpdateSymbolsEth(_timerUpdateSymbolsEth);
@@ -389,11 +389,11 @@ export default function Visualization(props: VisualizationProps) {
   const generateSymbol = (
     elapsed: number,
     dataset: Dataset[],
-    token: Token
+    token: Token,
   ) => {
     const pick = weightedPick(
       dataset,
-      dataset.map((d: any) => d.weight)
+      dataset.map((d: any) => d.weight),
     );
     const source =
       token === Token.DAI && pick.source === Source.YOU
@@ -402,7 +402,7 @@ export default function Visualization(props: VisualizationProps) {
         ? Source.DIRECT
         : Source.MATCHING;
     const weights = recipientsDetails.map(
-      (_: RecipientDetails, i: number) => pick[i]
+      (_: RecipientDetails, i: number) => pick[i],
     );
     const grantee = weightedPick(granteeIndexes, weights);
     const symbol = {
@@ -426,7 +426,7 @@ export default function Visualization(props: VisualizationProps) {
       (elapsed - symbol.startTime) / VIZ_ANIMATION_DURATION;
     const currentSymbols = symbolsGroup.current.selectAll(selector).data(
       symbols.filter((d) => xProgressAccessor(d) < 1 && d.token === token),
-      (symbol: Symbol) => symbol.id
+      (symbol: Symbol) => symbol.id,
     );
 
     currentSymbols.exit().remove();
@@ -444,7 +444,7 @@ export default function Visualization(props: VisualizationProps) {
       .transition()
       .duration(50)
       .style("opacity", (d: any) =>
-        xScale(xProgressAccessor(d)) < 10 ? 0 : 1
+        xScale(xProgressAccessor(d)) < 10 ? 0 : 1,
       );
   };
 
@@ -456,7 +456,7 @@ export default function Visualization(props: VisualizationProps) {
       .selectAll(token === Token.DAI ? ".dai-symbol" : ".eth-symbol")
       .data(
         symbols.filter((d: any) => d.token === token),
-        (d: any) => d.id
+        (d: any) => d.id,
       );
 
     entries
@@ -464,7 +464,7 @@ export default function Visualization(props: VisualizationProps) {
       .append("svg:image")
       .attr(
         "class",
-        `symbol ${token === Token.DAI ? "dai-symbol" : "eth-symbol"}`
+        `symbol ${token === Token.DAI ? "dai-symbol" : "eth-symbol"}`,
       )
       .attr(
         "xlink:href",
@@ -474,7 +474,7 @@ export default function Visualization(props: VisualizationProps) {
           ? daiDark
           : symbol.you
           ? ethLight
-          : ethDark
+          : ethDark,
       )
       .attr("width", 16)
       .attr("height", 16)
@@ -492,7 +492,7 @@ export default function Visualization(props: VisualizationProps) {
     ranges: {
       input: Range;
       output: Range;
-    }
+    },
   ) => {
     const { output, input } = ranges;
     const slope = (output.end - output.start) / (input.end - input.start);
@@ -524,14 +524,14 @@ export default function Visualization(props: VisualizationProps) {
   const calcTotalFlowRate = (flowRates: bigint[]) =>
     flowRates.reduce(
       (acc: bigint, flowRate: bigint) => acc + flowRate,
-      BigInt(0)
+      BigInt(0),
     );
 
   const calcContributionImpactOnMatching = (
     contributionFlowRate: bigint,
     poolFlowRate: bigint,
     granteeUnits: bigint,
-    totalUnits: bigint
+    totalUnits: bigint,
   ) => {
     const scaledFlowRate = contributionFlowRate / BigInt(1e6);
 
@@ -567,7 +567,7 @@ export default function Visualization(props: VisualizationProps) {
             dimensions={dimensions}
             endYScale={endYScale}
             descriptions={recipientsDetails.map(
-              (elem) => elem.description ?? ""
+              (elem) => elem.description ?? "",
             )}
             {...props}
           />
