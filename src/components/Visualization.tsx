@@ -143,7 +143,7 @@ export default function Visualization(props: VisualizationProps) {
     useMemo(() => {
       const xScale = scaleLinear()
         .domain([0, 1])
-        .range([0, dimensions.width / 2])
+        .range([0, dimensions.width])
         .clamp(true);
       const startYScale = scaleLinear()
         .domain([-1, sourceIndexes.length])
@@ -170,7 +170,7 @@ export default function Visualization(props: VisualizationProps) {
       .append("g")
       .style("transform", `translateY(-60px)`);
     const linkLineGenerator = line()
-      .x((_d, i) => i * (dimensions.width / 10))
+      .x((_d, i) => i * (dimensions.width / 5))
       .y((d, i) => (i <= 2 ? startYScale(d[0]) : endYScale(d[1])))
       .curve(curveMonotoneX);
     const linkOptions = merge(

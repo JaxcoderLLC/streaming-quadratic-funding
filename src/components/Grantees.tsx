@@ -45,9 +45,8 @@ export default function Grantees(props: GranteesProps) {
       direction="vertical"
       className="text-white position-relative"
       style={{
-        width: VIZ_CARD_WIDTH_GRANTEE,
         height: dimensions.height,
-        marginRight: 100,
+        width: VIZ_CARD_WIDTH_GRANTEE,
       }}
     >
       {grantees.map((grantee, i) => (
