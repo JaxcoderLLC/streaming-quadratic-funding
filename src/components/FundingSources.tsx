@@ -106,7 +106,7 @@ export default function FundingSources(props: FundingSourcesProps) {
           height: dimensions.pathHeight,
         }}
       >
-        <Card.Header className="p-0 border-0 fs-4">User</Card.Header>
+        <Card.Header className="p-0 border-0 fs-4">Users</Card.Header>
         <Card.Body className="d-flex flex-column justify-content-center gap-1 p-0 pb-1 fs-6">
           <Stack direction="horizontal" gap={1} className="align-items-center">
             <Image src={DAIWhite} alt="dai" width={14} />
