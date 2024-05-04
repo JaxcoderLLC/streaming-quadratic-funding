@@ -100,7 +100,7 @@ export default function EditStream(props: EditStreamProps) {
   const [step, setStep] = useState(Step.SELECT_AMOUNT);
   const [amountPerTimeInterval, setAmountPerTimeInterval] = useState("");
   const [timeInterval, setTimeInterval] = useState<TimeInterval>(
-    TimeInterval.MONTH
+    TimeInterval.MONTH,
   );
 
   const { address } = useAccount();
@@ -117,13 +117,13 @@ export default function EditStream(props: EditStreamProps) {
   const userTokenSnapshot = userTokenSnapshots?.filter((snapshot) =>
     isFundingMatchingPool
       ? snapshot.token === ETHX_ADDRESS.toLowerCase()
-      : snapshot.token === DAIX_ADDRESS.toLowerCase()
+      : snapshot.token === DAIX_ADDRESS.toLowerCase(),
   )[0];
   const accountFlowRate = userTokenSnapshot?.totalNetFlowRate ?? "0";
   const superTokenBalance = useFlowingAmount(
     BigInt(userTokenSnapshot?.balanceUntilUpdatedAt ?? 0),
     userTokenSnapshot?.updatedAtTimestamp ?? 0,
-    BigInt(accountFlowRate)
+    BigInt(accountFlowRate),
   );
   const { data: underlyingTokenBalance } = useBalance({
     address,
@@ -202,9 +202,9 @@ export default function EditStream(props: EditStreamProps) {
                   parseEther(wrapAmount ?? "0")) /
                   (BigInt(-accountFlowRate) -
                     BigInt(flowRateToReceiver) +
-                    newFlowRate)
+                    newFlowRate),
               ),
-            })
+            }),
           )
           .unix();
       }
@@ -279,7 +279,7 @@ export default function EditStream(props: EditStreamProps) {
       transactions.push(async () => {
         await updatePermissions(
           SQF_STRATEGY_ADDRESS,
-          BigInt(newFlowRate).toString()
+          BigInt(newFlowRate).toString(),
         );
       });
     }
@@ -305,7 +305,7 @@ export default function EditStream(props: EditStreamProps) {
       const currentStreamValue = roundWeiAmount(
         BigInt(flowRateToReceiver) *
           BigInt(fromTimeUnitsToSeconds(1, unitOfTime[timeInterval])),
-        4
+        4,
       );
 
       setAmountPerTimeInterval(currentStreamValue);
@@ -322,7 +322,7 @@ export default function EditStream(props: EditStreamProps) {
           .isBefore(dayjs().add(dayjs.duration({ months: 3 })))
       ) {
         setWrapAmount(
-          formatEther(parseEther(amountPerTimeInterval) * BigInt(3))
+          formatEther(parseEther(amountPerTimeInterval) * BigInt(3)),
         );
       } else {
         setWrapAmount("");
@@ -332,14 +332,14 @@ export default function EditStream(props: EditStreamProps) {
         (
           parseEther(amountPerTimeInterval) /
           BigInt(fromTimeUnitsToSeconds(1, unitOfTime[timeInterval]))
-        ).toString()
+        ).toString(),
       );
     }
   }, [amountPerTimeInterval, timeInterval, areTransactionsLoading]);
 
   const handleAmountSelection = (
     e: React.ChangeEvent<HTMLInputElement>,
-    setAmount: (value: string) => void
+    setAmount: (value: string) => void,
   ) => {
     const { value } = e.target;
 
@@ -445,8 +445,8 @@ export default function EditStream(props: EditStreamProps) {
                         convertStreamValueToInterval(
                           parseEther(amountPerTimeInterval),
                           timeInterval,
-                          TimeInterval.DAY
-                        )
+                          TimeInterval.DAY,
+                        ),
                       );
                       setTimeInterval(TimeInterval.DAY);
                     }}
@@ -460,8 +460,8 @@ export default function EditStream(props: EditStreamProps) {
                         convertStreamValueToInterval(
                           parseEther(amountPerTimeInterval),
                           timeInterval,
-                          TimeInterval.WEEK
-                        )
+                          TimeInterval.WEEK,
+                        ),
                       );
                       setTimeInterval(TimeInterval.WEEK);
                     }}
@@ -475,8 +475,8 @@ export default function EditStream(props: EditStreamProps) {
                         convertStreamValueToInterval(
                           parseEther(amountPerTimeInterval),
                           timeInterval,
-                          TimeInterval.MONTH
-                        )
+                          TimeInterval.MONTH,
+                        ),
                       );
                       setTimeInterval(TimeInterval.MONTH);
                     }}
@@ -490,8 +490,8 @@ export default function EditStream(props: EditStreamProps) {
                         convertStreamValueToInterval(
                           parseEther(amountPerTimeInterval),
                           timeInterval,
-                          TimeInterval.YEAR
-                        )
+                          TimeInterval.YEAR,
+                        ),
                       );
                       setTimeInterval(TimeInterval.YEAR);
                     }}
@@ -521,7 +521,7 @@ export default function EditStream(props: EditStreamProps) {
                       : isFundingMatchingPool ||
                         (passportScore && passportScore >= minPassportScore)
                       ? Step.REVIEW
-                      : Step.MINT_PASSPORT
+                      : Step.MINT_PASSPORT,
                   )
                 }
               >
@@ -592,7 +592,7 @@ export default function EditStream(props: EditStreamProps) {
                   {ethBalance
                     ? formatEther(ethBalance.value + superTokenBalance).slice(
                         0,
-                        8
+                        8,
                       )
                     : "0"}
                   {hasSuggestedTokenBalance && (
@@ -648,7 +648,7 @@ export default function EditStream(props: EditStreamProps) {
                   >
                     {underlyingTokenBalance
                       ? formatEther(
-                          underlyingTokenBalance.value + superTokenBalance
+                          underlyingTokenBalance.value + superTokenBalance,
                         ).slice(0, 8)
                       : "0"}
                     {hasSuggestedTokenBalance && (
@@ -696,7 +696,7 @@ export default function EditStream(props: EditStreamProps) {
                     : isFundingMatchingPool ||
                       (passportScore && passportScore >= minPassportScore)
                     ? Step.REVIEW
-                    : Step.MINT_PASSPORT
+                    : Step.MINT_PASSPORT,
                 )
               }
             >
@@ -821,8 +821,8 @@ export default function EditStream(props: EditStreamProps) {
               Number(
                 formatUnits(
                   underlyingTokenBalance.value,
-                  underlyingTokenBalance.decimals
-                )
+                  underlyingTokenBalance.decimals,
+                ),
               ) < Number(wrapAmount) && (
                 <Alert variant="danger" className="m-0">
                   Insufficient Balance
@@ -846,9 +846,9 @@ export default function EditStream(props: EditStreamProps) {
                     setWrapAmount("");
                     setStep(
                       isFundingMatchingPool ||
-                        (passportScore && passportScore >= minPassportScore)
+                        (passportScore && passportScore >= 0)
                         ? Step.REVIEW
-                        : Step.MINT_PASSPORT
+                        : Step.MINT_PASSPORT,
                     );
                   }}
                 >
@@ -864,8 +864,8 @@ export default function EditStream(props: EditStreamProps) {
                   Number(
                     formatUnits(
                       underlyingTokenBalance.value,
-                      underlyingTokenBalance.decimals
-                    )
+                      underlyingTokenBalance.decimals,
+                    ),
                   ) < Number(wrapAmount)
                 }
                 className="w-50 py-1 rounded-3 text-white"
@@ -874,7 +874,7 @@ export default function EditStream(props: EditStreamProps) {
                     isFundingMatchingPool ||
                       (passportScore && passportScore >= minPassportScore)
                       ? Step.REVIEW
-                      : Step.MINT_PASSPORT
+                      : Step.MINT_PASSPORT,
                   )
                 }
               >
@@ -930,7 +930,7 @@ export default function EditStream(props: EditStreamProps) {
                 direction="horizontal"
                 gap={3}
                 className={`${
-                  passportScore && passportScore > minPassportScore
+                  passportScore && passportScore >= 0
                     ? "text-success"
                     : passportScore
                     ? "text-danger"
@@ -944,7 +944,7 @@ export default function EditStream(props: EditStreamProps) {
                     : "N/A"}
                 </Card.Text>
                 <Card.Text className="m-0 fs-5" style={{ width: 80 }}>
-                  min. {Number(minPassportScore) / 10000} required for matching
+                  min. {Number(0) / 10000} required for matching
                 </Card.Text>
                 <Button
                   variant="transparent"
@@ -957,7 +957,7 @@ export default function EditStream(props: EditStreamProps) {
                     width={24}
                     style={{
                       filter:
-                        passportScore && passportScore > minPassportScore
+                        passportScore && passportScore >= 0
                           ? "invert(65%) sepia(44%) saturate(6263%) hue-rotate(103deg) brightness(95%) contrast(97%)"
                           : passportScore
                           ? "invert(27%) sepia(47%) saturate(3471%) hue-rotate(336deg) brightness(93%) contrast(85%)"
@@ -978,7 +978,7 @@ export default function EditStream(props: EditStreamProps) {
               </Button>
               <Button
                 variant="success"
-                disabled={!passportScore || passportScore < minPassportScore}
+                // disabled={!passportScore || passportScore <= 0}
                 className="w-100 m-0 ms-auto mt-1 fs-4 text-white fw-bold"
                 onClick={() => setStep(Step.REVIEW)}
               >
@@ -1078,7 +1078,7 @@ export default function EditStream(props: EditStreamProps) {
                     <Card.Text className="border-0 text-center text-white fs-6">
                       New Balance:{" "}
                       {formatEther(
-                        superTokenBalance + parseEther(wrapAmount ?? "0")
+                        superTokenBalance + parseEther(wrapAmount ?? "0"),
                       ).slice(0, 8)}
                     </Card.Text>
                   </Stack>
@@ -1150,7 +1150,7 @@ export default function EditStream(props: EditStreamProps) {
                     {convertStreamValueToInterval(
                       parseEther(amountPerTimeInterval),
                       timeInterval,
-                      TimeInterval.MONTH
+                      TimeInterval.MONTH,
                     )}
                   </Badge>
                 </Stack>
@@ -1181,7 +1181,7 @@ export default function EditStream(props: EditStreamProps) {
                             (
                               Number(formatEther(netImpact)) *
                               fromTimeUnitsToSeconds(1, "months")
-                            ).toFixed(6)
+                            ).toFixed(6),
                           )}`
                         : 0}
                     </Badge>
